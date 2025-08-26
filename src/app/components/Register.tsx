@@ -8,15 +8,34 @@ import PasswordInput from './PasswordInput';
 
 const Register = () => {
 
+
+  async function registerUser(values: any) {
+    try {
+      const res = await fetch('/signup',{
+        method: 'Post',
+        body: JSON.stringify(values)
+      })
+      if (!res.ok) {
+        throw new Error(`Response status: ${res.status}`);
+      }
+      const result = await res.json();
+      console.log("The return data", result)
+    }
+    catch (error) {
+      console.log("This route is not working", error)
+    }
+
+  }
+
   const [visiblePas, setVisiblePas] = useState(false);
   const [visibleCpas, setVisibleCpas] = useState(false)
 
-  function visiblePassword(){
-    setVisiblePas(pre=> !pre)
+  function visiblePassword() {
+    setVisiblePas(pre => !pre)
   }
 
-  function visibleConPassword(){
-    setVisibleCpas(pre=> !pre)
+  function visibleConPassword() {
+    setVisibleCpas(pre => !pre)
   }
   interface Values {
     fname: string,
@@ -72,8 +91,10 @@ const Register = () => {
     },
     validate,
     onSubmit: values => {
-      console.log("adajsklfdj",values)
+      console.log("adajsklfdj", values)
       // alert(JSON.stringify(values, null, 2));
+
+      registerUser(values);
     },
   });
   return (
@@ -88,7 +109,7 @@ const Register = () => {
             placeholder='First Name'
             onChange={formik.handleChange}
             value={formik.values.fname}
-             />
+          />
           {formik.errors.fname ? <div className='text-red-500 text-[12px]'>{formik.errors.fname}</div> : null}
         </div>
 
@@ -101,7 +122,7 @@ const Register = () => {
             onChange={formik.handleChange}
             value={formik.values.lname}
             onBlur={formik.handleBlur}
-            />
+          />
           {formik.errors.lname ? <div className='text-red-500 text-[12px]'>{formik.errors.lname}</div> : null}
         </div>
 
@@ -114,20 +135,20 @@ const Register = () => {
             value={formik.values.email}
             placeholder='Enter your email'
             onBlur={formik.handleBlur}
-            />
+          />
           {formik.errors.email ? <div className='text-red-500 text-[12px]'>{formik.errors.email}</div> : null}
         </div>
 
         <div className='flex flex-col items-start w-full'>
           <label htmlFor="password">Password</label>
-          <PasswordInput 
-            type = {visiblePas ? 'text': 'password'}
+          <PasswordInput
+            type={visiblePas ? 'text' : 'password'}
             name='password'
             id='password'
             onChange={formik.handleChange}
             value={formik.values.password}
             placeholder='Enter your password'
-            show = {visiblePassword}
+            show={visiblePassword}
             onBlur={formik.handleBlur}
             className='px-2 py-1 border-[0.5px] border-gray-500 rounded-md w-full' />
           {formik.errors.password ? <div className='text-red-500 text-[12px]'>{formik.errors.password}</div> : null}
@@ -135,14 +156,14 @@ const Register = () => {
 
         <div className='flex flex-col items-start w-full'>
           <label htmlFor="cpassword">Confirm Password</label>
-          <PasswordInput 
-            type = {visibleCpas ? 'text': 'password'}
+          <PasswordInput
+            type={visibleCpas ? 'text' : 'password'}
             name='cpassword'
             id='cpassword'
             onChange={formik.handleChange}
             value={formik.values.cpassword}
             placeholder='Confirm your password'
-            show = {visibleConPassword}
+            show={visibleConPassword}
             onBlur={formik.handleBlur}
             className='px-2 py-1 border-[0.5px] border-gray-500 rounded-md w-full' />
           {formik.errors.cpassword ? <div className='text-red-500 text-[12px]'>{formik.errors.cpassword}</div> : null}

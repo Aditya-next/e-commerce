@@ -50,21 +50,22 @@ const Login = () => {
     });
     return (
         <div className='w-full h-[100vh] flex justify-center items-center'>
-            <form onSubmit={formik.handleSubmit} className='text-center border rounded-md bg-gray-100 px-10 py-10 space-y-4'>
+            <form onSubmit={formik.handleSubmit} className='text-center border rounded-md bg-gray-100 px-10 py-10 space-y-4 w-[500px]'>
                 <h4 className='font-bold text-[25px]'>Login</h4>
                 <div className='flex flex-col items-start'>
-                    <label htmlFor="email">Email</label>
+                    {/* <label htmlFor="email">Email</label> */}
                     <Input type="text"
                         id='email'
                         name='email'
                         onChange={formik.handleChange}
                         value={formik.values.email}
                         onBlur={formik.handleBlur}
+                        error={formik.errors.email}
                         placeholder='Enter your email'
                         className='px-2 py-1 border-[0.5px] border-gray-500 rounded-md w-full relative'
                          />
                         
-                    {formik.errors.email ? <div className='text-red-500 text-[12px]'>{formik.errors.email}</div> : null}
+                    {/* {formik.errors.email ? <div className='text-red-500 text-[12px]'>{formik.errors.email}</div> : null} */}
                 </div>
 
                 <div className='flex flex-col items-start relative'>
