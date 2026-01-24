@@ -1,0 +1,13 @@
+<svg width="220" height="70" viewBox="0 0 220 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="70" fill="white"/>
+  <!-- Tilted Balloon -->
+  <ellipse cx="35" cy="32" rx="13" ry="16" transform="rotate(-20 35 32)" fill="#7B9C8A"/>
+  <!-- Knot (centered under balloon) -->
+  <path d="M40 46 L42 49 L38 49 Z" fill="#5F7E70"/>
+  <!-- Curvy String -->
+  <path d="M40 49 C39 54, 42 57, 37 61 C35 63, 39 66, 38 68" stroke="#7B9C8A" stroke-width="1.5" fill="none"/>
+  <!-- Highlight -->
+  <circle cx="29" cy="27" r="3" fill="#A7C4B5" opacity="0.8"/>
+  <!-- Text -->
+  <text x="58" y="47" font-family="Poppins, sans-serif" font-weight="600" font-size="32" fill="#2E3A35" letter-spacing="0.5">e-<tspan fill="#7B9C8A">com</tspan></text>
+</svg>
