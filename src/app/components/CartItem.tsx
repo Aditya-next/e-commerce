@@ -1,3 +1,6 @@
+'use client'
+
+import { useAppSelector } from "../lib/hooks"
 
 type ratingType = {
     rate: number,
@@ -5,7 +8,6 @@ type ratingType = {
 }
 
 type cartItemType = {
-    addedItem: productsTypes[],
     removeHandler: any
 }
 
@@ -19,11 +21,12 @@ interface productsTypes {
     image: string
 }
 
-export default function CartItem({ addedItem, removeHandler }: cartItemType) {
-    console.log("added cart", addedItem)
+export default function CartItem({removeHandler }: cartItemType) {
+    // console.log("added cart", addedItem)
+     const item:productsTypes[] =  useAppSelector(state=> state.cart.items)
     return (
         <div>
-            {addedItem.map((item, index) =>
+            {item?.map((item, index) =>
                 <div key={index}
                     className="flex gap-3 mt-2">
                     {item?.title}

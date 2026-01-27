@@ -6,9 +6,6 @@ import UserIcons from "./ui/UserIcons";
 
 export default function Header() {
 
-
-
-
     return (
         // navigation menu
         <div className="fixed top-0 w-full bg-white z-10">

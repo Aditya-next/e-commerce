@@ -1,17 +1,17 @@
 'use client'
 
-import Image from "next/image"
-import { it } from "node:test";
 import { useEffect, useReducer, useState } from "react";
 import CartItem from "./CartItem";
+import { useAppDispatch } from "../lib/hooks";
+import { add, deleted } from "../lib/feature/cart/cartSlice";
 
 
-type ratingType = {
+export type ratingType = {
     rate: number,
     count: number,
 }
 
-interface productsTypes {
+export interface productsTypes {
     id: number,
     title: string,
     price: number,
@@ -23,12 +23,7 @@ interface productsTypes {
 
 export default function ProductList() {
 
-    // const [cardItem, setCartItem] = useState<productsTypes[]>([]);
-
-    // conver useState to useReducer
-    const [cartItem, dispatch] = useReducer(taskReducer, []);
-
-
+    const dispatch = useAppDispatch();
 
     const [products, setProducts] = useState<productsTypes[]>([]);
 
@@ -51,42 +46,14 @@ export default function ProductList() {
         getData();
     }, [])
 
-    const handleAddItem = (item:productsTypes) => {
-        //dispatch for useReducer
-        dispatch({
-            type : 'added',
-            data : item
-        })
-        // setCartItem([...cardItem, item])
+    const handleAddItem = (item: productsTypes) => {
+        //redux function
+        dispatch(add(item))
     }
 
-    const handleRemoveItem =(id:number)=>
-    {
-        dispatch({
-            type : 'remove',
-            data : id
-        })
-        // console.log("id", id);
-        // setCartItem(cardItem.filter(item=>item.id !== id));
-    }
-
-    function taskReducer(cartItem:any, action:any)
-    {
-        switch(action.type){
-        case 'added':
-        {
-            return[
-                ...cartItem,
-                action.data
-            ];
-        }
-        case 'remove' :{
-            return cartItem.filter((items:productsTypes)=> items.id !== action.id);
-        }
-        default :{
-             throw Error('Unknown action: ' + action.type);
-        }
-    }
+    const handleRemoveItem = (id: number) => {
+        // redux function
+        dispatch(deleted(id));
     }
 
     return (
@@ -112,11 +79,7 @@ export default function ProductList() {
                     </div>
                 ))}
             </div>
-            <CartItem addedItem = {cartItem} removeHandler = {handleRemoveItem}/>
+            <CartItem removeHandler={handleRemoveItem} />
         </div>
-
-        
-
-
     )
 }
