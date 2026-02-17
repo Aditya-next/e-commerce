@@ -4,7 +4,7 @@ import CartIcon from "./ui/CartIcon";
 import UserIcons from "./ui/UserIcons";
 
 
-export default function Header() {
+export default function Header({searcher}:{searcher:any}) {
 
     return (
         // navigation menu
@@ -26,7 +26,7 @@ export default function Header() {
             </div>
 
             <div className="flex items-center gap-12">
-                <SearchBar/>
+                <SearchBar searcher = {searcher}/>
                 <UserIcons/>
                 <CartIcon/>
             </div>
