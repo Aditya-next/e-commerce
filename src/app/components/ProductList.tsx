@@ -99,11 +99,6 @@ export default function ProductList({ priceFilter, categoryFilter, searchValue}:
         dispatch(add(item))
     }
 
-    const handleRemoveItem = (id: number) => {
-        // redux function
-        dispatch(deleted(id));
-    }
-
     return (
         <div className="w-full border border-gray-200 rounded p-4">
             <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-5 justify-stretch">
@@ -127,7 +122,9 @@ export default function ProductList({ priceFilter, categoryFilter, searchValue}:
                     </div>
                 ))}
             </div>
-            <CartItem removeHandler={handleRemoveItem} />
+
+            {/* now it has no use. need to remove it with component */}
+            {/* <CartItem removeHandler={handleRemoveItem} /> */}
         </div>
     )
 }

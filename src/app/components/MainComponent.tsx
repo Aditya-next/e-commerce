@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
+import FixedCart from "./FixedCart";
 
 export default function MainComponent(){
 
@@ -10,6 +11,7 @@ export default function MainComponent(){
         <div>
             <Header searcher = {setSearchItem}/>
             <Main searchValue = {searchItem}/>
+            <FixedCart/>
         </div>
     )
 }
