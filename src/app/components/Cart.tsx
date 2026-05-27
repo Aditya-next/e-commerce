@@ -3,19 +3,19 @@ import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "../lib/hooks"
 import { productsTypes } from "./ProductList"
 import { Star } from 'lucide-react';
-import { deleted } from "../lib/feature/cart/cartSlice";
+import { CartItem, deleted } from "../lib/feature/cart/cartSlice";
 
 
 
 export default function Cart() {
 
-    const item: productsTypes[] = useAppSelector(state => state.cart.items);
+    const item: CartItem[] = useAppSelector(state => state.cart.items);
 
     let subTotal = item.reduce((total, n) => { return total += n.price }, 0)
 
     const dispatch = useAppDispatch();
 
-    function hanldeRemoveCart(id:number){
+    function hanldeRemoveCart(id:number | string){
         dispatch(deleted(id));
     }
 
@@ -76,7 +76,7 @@ export default function Cart() {
 
             <div className="h-[200px] p-4  max-h-[200px] w-[300px] border border-gray-200 rounded space-y-2 sticky top-4">
                 <div className="flex gap-x-2"><p className="text-sm">Subtotal ({item.length} items):</p> <p className="font-semibold">&#8377;{subTotal.toFixed(2)}</p></div> 
-                <Link href='' className="text-sm block text-center w-full py-1 rounded-full border bg-amber-300">proceed to pay</Link>
+                <Link href={'/order'} className="text-sm block text-center w-full py-1 rounded-full border bg-amber-300">proceed to pay</Link>
             </div>
         </div>
     )

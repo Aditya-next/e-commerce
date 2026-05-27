@@ -1,4 +1,3 @@
-import { BaggageClaim, Search, UserRound } from "lucide-react";
 import SearchBar from "./ui/SearchBar";
 import CartIcon from "./ui/CartIcon";
 import UserIcons from "./ui/UserIcons";

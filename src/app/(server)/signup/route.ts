@@ -1,5 +1,6 @@
-// import { Prisma, PrismaClient } from "../../../../generated/prisma";
+
 import prisma from "../../../../lib/prisma";
+import bcrypt from 'bcrypt'
 
 
 
@@ -7,22 +8,26 @@ import prisma from "../../../../lib/prisma";
 
 
 export async function POST(request: Request){
-        // const prisma = new PrismaClient();
-
     const {fname, lname, email, password} = await request.json();
+    // if user exist 
+    const isUser = await prisma.signup.findUnique({
+  where: { email: email }
+});
+if(isUser?.email){
+    return Response.json({"msg" : "user is already register"});
+}
+else{
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(hashedPassword);
     const user = await prisma.signup.create({
         data:{
             firstname:fname,
             lastname: lname,
             email:email,
-            password: password
-        
-            
-            
+            password: hashedPassword    
         }
-    }
-    )
-    console.log("form data", fname, lname, email, password);    
-    console.log('Congrates this route is working');
-    return Response.json({ user })
+    })   
+    return Response.json({ "msg": "working fine" })
+}
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import Link from 'next/link'
 import { useFormik } from 'formik';
 import Input from './Input';
@@ -9,6 +9,24 @@ import PasswordInput from './PasswordInput';
 const Login = () => {
 
     const [visible, setVisible] = useState(false)
+
+async function loginUser(values: Values) {
+    try {
+      const res = await fetch('/userLogin',{
+        method: 'Post',
+        body: JSON.stringify(values)
+      })
+      if (!res.ok) {
+        throw new Error(`Response status: ${res.status}`);
+      }
+      const result = await res.json();
+      console.log("The return data", result);
+    }
+    catch (error) {
+      console.log("This route is not working", error);
+    }
+
+  }
 
    
    function visiblePassword(){
@@ -45,7 +63,7 @@ const Login = () => {
         },
         validate,
         onSubmit: values => {
-            console.log("login values", values)
+            loginUser(values)
         },
     });
     return (

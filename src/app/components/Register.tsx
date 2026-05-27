@@ -22,7 +22,7 @@ const Register = () => {
       console.log("The return data", result)
     }
     catch (error) {
-      console.log("This route is not working", error)
+      console.log("This route is not working", error);
     }
 
   }
