@@ -1,8 +1,14 @@
+import { ratingType } from '@/app/components/ProductList'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface CartItem {
-  id: number | string
-  [key: string]: any
+ id: number,
+    title: string,
+    price: number,
+    description: string,
+    category: string,
+    rating: ratingType,
+    image: string
 }
 
 interface CartState {

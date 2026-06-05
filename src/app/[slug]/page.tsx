@@ -1,6 +1,6 @@
 import { productData } from "@/data/ProductData"
-import Header from "../components/Header"
 import ProductDetail from "../components/ProductDetails"
+import DetailHeader from "../components/DetailHeader"
 
 export default async function Page({
     params,
@@ -9,11 +9,10 @@ export default async function Page({
 },) {
     const { slug } = await params
     const data = await productData(slug);
-    console.log("data for specific product",data);
 
     return(
          <div>
-        <Header />
+        <DetailHeader />
        <ProductDetail details = {data}/>
     </div>
     )

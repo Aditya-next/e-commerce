@@ -1,16 +1,24 @@
 'use client'
 
-import { useEffect, useReducer, useState } from "react";
-import CartItem from "./CartItem";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "../lib/hooks";
-import { add, deleted } from "../lib/feature/cart/cartSlice";
+import { add, } from "../lib/feature/cart/cartSlice";
 import Link from 'next/link'
+import { Category } from "./Main";
+import Image from "next/image";
 
 
 export type ratingType = {
     rate: number,
     count: number,
 }
+
+
+type ProductListProps = {
+  priceFilter: number;
+  categoryFilter: Category[];
+  searchValue: string;
+};
 
 export interface productsTypes {
     id: number,
@@ -22,13 +30,12 @@ export interface productsTypes {
     image: string
 }
 
-export default function ProductList({ priceFilter, categoryFilter, searchValue}:{priceFilter:any,categoryFilter:any , searchValue:string}) {
+export default function ProductList({ priceFilter, categoryFilter, searchValue}:ProductListProps) {
 
     const dispatch = useAppDispatch();
 
     const [products, setProducts] = useState<productsTypes[]>([]);
     const [filterData, setFilterData] = useState<productsTypes[]>([]);
-    const [searchData, setSearchData] = useState<productsTypes[]>([])
 
     useEffect(() => {
         async function getData() {
@@ -50,49 +57,41 @@ export default function ProductList({ priceFilter, categoryFilter, searchValue}:
         getData();
     }, [])
 
-    // this is for filters
-    useEffect(() => {
-        const data = searchValue ?  searchData.filter((item) => {
-            if (categoryFilter.length === 0 && priceFilter == 0) {
-                return true;
-            }
-            else if (categoryFilter.length > 0 && priceFilter == 0) {
-                return categoryFilter.map((c:any) => c.category).includes(item.category);
-            }
-            else if (categoryFilter.length == 0 && priceFilter > 0) {
-                return item.price <= priceFilter;
-            }
-            else {
-                return categoryFilter.map((c:any) => c.category).includes(item.category) && item.price <= priceFilter;
-            }
-        }) 
-        :
-         products.filter((item) => {
-            if (categoryFilter.length === 0 && priceFilter == 0) {
-                return true;
-            }
-            else if (categoryFilter.length > 0 && priceFilter == 0) {
-                return categoryFilter.map((c:any) => c.category).includes(item.category);
-            }
-            else if (categoryFilter.length == 0 && priceFilter > 0) {
-                return item.price <= priceFilter;
-            }   
-            else {
-                return categoryFilter.map((c:any) => c.category).includes(item.category) && item.price <= priceFilter;
-            }
-        })
-        setFilterData(data);
-    }, [priceFilter, categoryFilter])
+useEffect(() => {
+  let data = products;
 
-    // for searching
-    useEffect(()=>{
-        if(searchValue){
-       const data = products.filter((item)=>(item.category).includes(searchValue) ||  (item.description).includes(searchValue) || (item.title).includes(searchValue))
-       setSearchData(data);
-       setFilterData(data);
-        }
+  // Search
+  if (searchValue) {
+    data = data.filter(
+      (item) =>
+        item.category
+          .toLowerCase()
+          .includes(searchValue.toLowerCase()) ||
+        item.description
+          .toLowerCase()
+          .includes(searchValue.toLowerCase()) ||
+        item.title
+          .toLowerCase()
+          .includes(searchValue.toLowerCase())
+    );
+  }
 
-    },[searchValue])
+  // Category Filter
+  if (categoryFilter.length > 0) {
+    const categories = categoryFilter.map((c) => c.category);
+
+    data = data.filter((item) =>
+      categories.includes(item.category)
+    );
+  }
+
+  // Price Filter
+  if (priceFilter > 0) {
+    data = data.filter((item) => item.price <= priceFilter);
+  }
+
+  setFilterData(data);
+}, [products, searchValue, categoryFilter, priceFilter]);
 
     const handleAddItem = (item: productsTypes) => {
         //redux function
@@ -104,11 +103,12 @@ export default function ProductList({ priceFilter, categoryFilter, searchValue}:
             <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-5 justify-stretch">
                 {filterData.length > 0 && filterData.map((item, index) => (
                     <div key={index} className=" grid-cols-[repeat(auto-fit,minmax(300px,1fr))] border relative">
-                        <div className="w-full h-[250px]  bg-gray-200 p-4">
-                            <img
+                        <div className="w-full h-[250px]  bg-gray-200 p-4 relative">
+                            <Image
                                 src={item.image || ''}
                                 alt="kurtaImage"
                                 className="object-contain h-full w-full"
+                                fill
                             />
                         </div>
                         <div className="p-2 bg-white">

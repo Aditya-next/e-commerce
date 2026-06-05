@@ -1,4 +1,4 @@
-export async function productData(id: any) {
+export async function productData(id: number | string) {
     const productUrl = `https://fakestoreapi.com/products/${id}`;
     try {
         const data = await fetch(productUrl);

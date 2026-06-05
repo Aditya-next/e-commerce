@@ -1,13 +1,8 @@
-import SearchBar from "./ui/SearchBar";
+import Image from "next/image";
 import CartIcon from "./ui/CartIcon";
 import UserIcons from "./ui/UserIcons";
-import Image from "next/image";
 
-type HeaderProps = {
-  searcher: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export default function Header({ searcher }: HeaderProps) {
+export default function DetailHeader() {
   return (
     // navigation menu
     <div className="fixed top-0 w-full bg-white z-10">
@@ -16,10 +11,10 @@ export default function Header({ searcher }: HeaderProps) {
           <div className="h-[50px] relative">
             <Image src="logo.svg" className="h-full" alt="" fill />
           </div>
+          <nav className="h-full relative"></nav>
         </div>
 
         <div className="flex items-center gap-12">
-          <SearchBar searcher={searcher} />
           <UserIcons />
           <CartIcon />
         </div>

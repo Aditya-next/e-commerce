@@ -1,6 +1,7 @@
 
 import prisma from "../../../../lib/prisma";
 import bcrypt from 'bcrypt'
+import { NextResponse } from 'next/server'
 
 
 
@@ -14,13 +15,12 @@ export async function POST(request: Request){
   where: { email: email }
 });
 if(isUser?.email){
-    return Response.json({"msg" : "user is already register"});
+    return  NextResponse.json({ message: 'User already exist' }, { status: 409 })
 }
 else{
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
-    const user = await prisma.signup.create({
+    await prisma.signup.create({
         data:{
             firstname:fname,
             lastname: lname,
@@ -28,6 +28,6 @@ else{
             password: hashedPassword    
         }
     })   
-    return Response.json({ "msg": "working fine" })
+    return  NextResponse.json({ message: 'new user added' }, { status: 201 })
 }
 }

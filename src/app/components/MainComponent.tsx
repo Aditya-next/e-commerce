@@ -6,7 +6,7 @@ import FixedCart from "./FixedCart";
 
 export default function MainComponent(){
 
-    const [searchItem, setSearchItem] = useState('');
+    const [searchItem, setSearchItem] = useState<string>('');
     return(
         <div>
             <Header searcher = {setSearchItem}/>

@@ -1,17 +1,18 @@
 'use client'
 import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "../lib/hooks"
-import { productsTypes } from "./ProductList"
 import { Star } from 'lucide-react';
-import { CartItem, deleted } from "../lib/feature/cart/cartSlice";
+import {deleted } from "../lib/feature/cart/cartSlice";
+import { productsTypes } from "./ProductList";
+import Image from "next/image";
 
 
 
 export default function Cart() {
 
-    const item: CartItem[] = useAppSelector(state => state.cart.items);
+    const item: productsTypes[] = useAppSelector(state => state.cart.items);
 
-    let subTotal = item.reduce((total, n) => { return total += n.price }, 0)
+    const subTotal = item.reduce((total, n) => { return total += n.price }, 0)
 
     const dispatch = useAppDispatch();
 
@@ -23,10 +24,11 @@ export default function Cart() {
         return (
             <div className="p-4 md:px-8 lg:px-16 2xl:px-20]">
                 <div className=" bg-white border border-gray-200 rounded-lg px-15 py-5 flex  gap-7">
-                    <div className="w-[250px]">
-                        <img src="images/emptyCart.png"
+                    <div className="w-[250px] relative">
+                        <Image src="images/emptyCart.png"
                             alt="empty cart"
                             className="object-contain object-center"
+                            fill
                         />
                     </div>
                     <div className="space-y-4">
@@ -50,9 +52,10 @@ export default function Cart() {
                     {item && item.map((pro) => (
                         <div className="flex justify-between py-3 border-b border-gray-300" key={pro.id}>
                             <div className="flex gap-5 items-center justify-between ">
-                                <div className="min-w-[150px] h-[100px]">
-                                    <img src={pro?.image} alt="product image"
-                                        className="object-contain h-full w-full" />
+                                <div className="min-w-[150px] h-[100px] relative">
+                                    <Image src={pro?.image} alt="product image"
+                                        className="object-contain h-full w-full"
+                                        fill />
                                 </div>
                                 <div className="space-y-1">
                                     <h3 className="font-semibold ">{pro.title}</h3>

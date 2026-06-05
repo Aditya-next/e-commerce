@@ -7,9 +7,8 @@ import Input from './Input';
 import PasswordInput from './PasswordInput';
 
 const Register = () => {
-
-
-  async function registerUser(values: any) {
+  
+  async function registerUser(values: Values) {
     try {
       const res = await fetch('/signup',{
         method: 'Post',
@@ -46,8 +45,16 @@ const Register = () => {
 
   }
 
-  function validate(values: Values) {
-    const errors: any = {};
+  interface Errors {
+  fname?: string;
+  lname?: string;
+  email?: string;
+  password?: string;
+  cpassword?: string;
+}
+
+  function validate(values: Values):Errors {
+    const errors: Errors = {};
 
     if (!values.fname) {
       errors.fname = 'Required';
@@ -103,44 +110,48 @@ const Register = () => {
         <h4 className='font-bold text-[25px]'>Register</h4>
         <div className='flex flex-col items-start w-full'>
           <label htmlFor="fname">First Name</label>
-          <Input type="text"
+          <Input
+            type="text"
             name='fname'
             id='fname'
             placeholder='First Name'
             onChange={formik.handleChange}
             value={formik.values.fname}
+            onBlur={formik.handleBlur}
+            error = {formik.errors.fname}
+            className="px-2 py-1 border-[0.5px] border-gray-500 rounded-md w-full relative"
           />
-          {formik.errors.fname ? <div className='text-red-500 text-[12px]'>{formik.errors.fname}</div> : null}
         </div>
 
         <div className='flex flex-col items-start w-full'>
-          <label htmlFor="lname">Last Name</label>
-          <Input type="text"
+          <Input
+            type="text"
             name='lname'
             id='lname'
             placeholder='Last Name'
             onChange={formik.handleChange}
             value={formik.values.lname}
             onBlur={formik.handleBlur}
+            error = {formik.errors.lname}
+            className="px-2 py-1 border-[0.5px] border-gray-500 rounded-md w-full relative"
           />
-          {formik.errors.lname ? <div className='text-red-500 text-[12px]'>{formik.errors.lname}</div> : null}
         </div>
 
         <div className='flex flex-col items-start w-full'>
-          <label htmlFor="email">Email</label>
-          <Input type="email"
+          <Input
+            type="email"
             name='email'
             id='email'
             onChange={formik.handleChange}
             value={formik.values.email}
             placeholder='Enter your email'
             onBlur={formik.handleBlur}
+            error={formik.errors.email}
+            className="px-2 py-1 border-[0.5px] border-gray-500 rounded-md w-full relative"
           />
-          {formik.errors.email ? <div className='text-red-500 text-[12px]'>{formik.errors.email}</div> : null}
         </div>
 
         <div className='flex flex-col items-start w-full'>
-          <label htmlFor="password">Password</label>
           <PasswordInput
             type={visiblePas ? 'text' : 'password'}
             name='password'
@@ -150,22 +161,22 @@ const Register = () => {
             placeholder='Enter your password'
             show={visiblePassword}
             onBlur={formik.handleBlur}
-            className='px-2 py-1 border-[0.5px] border-gray-500 rounded-md w-full' />
+            />
           {formik.errors.password ? <div className='text-red-500 text-[12px]'>{formik.errors.password}</div> : null}
         </div>
 
         <div className='flex flex-col items-start w-full'>
-          <label htmlFor="cpassword">Confirm Password</label>
-          <PasswordInput
-            type={visibleCpas ? 'text' : 'password'}
-            name='cpassword'
-            id='cpassword'
-            onChange={formik.handleChange}
-            value={formik.values.cpassword}
-            placeholder='Confirm your password'
-            show={visibleConPassword}
-            onBlur={formik.handleBlur}
-            className='px-2 py-1 border-[0.5px] border-gray-500 rounded-md w-full' />
+          <label htmlFor="password">Password</label>
+                    <PasswordInput
+                      type={visibleCpas ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      onChange={formik.handleChange}
+                      value={formik.values.cpassword}
+                      onBlur={formik.handleBlur}
+                      placeholder="Enter your password"
+                      show={visibleConPassword}
+                    />
           {formik.errors.cpassword ? <div className='text-red-500 text-[12px]'>{formik.errors.cpassword}</div> : null}
         </div>
 

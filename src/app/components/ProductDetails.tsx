@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export type ratingType = {
     rate: number,
     count: number,
@@ -18,9 +20,11 @@ export default function ProductDetail({ details }: { details: productsTypes }) {
         <div className="p-4 md:px-8 lg:px-16 2xl:px-20] mt-[70px]">
             <div className="border border-gray-200 rounded p-4  min-h-screen">
                 <div className="flex gap-5">
-                    <div className="max-h-[500px] w-[500px] sticky top-[100px]">
-                        <img src={details.image} alt=""
-                            className="object-center object-contain" />
+                    <div className="max-h-[500px] w-[500px] sticky top-[100px] ">
+                        <Image src={details.image} alt=""
+                            className="object-center object-contain"
+                            height={500}
+                            width={500} />
                     </div>
 
                     <div className="px-8">

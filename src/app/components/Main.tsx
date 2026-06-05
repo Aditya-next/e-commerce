@@ -5,9 +5,13 @@ import { useState } from "react";
 import FilterSection from "./FilterSection";
 import ProductList from "./ProductList";
 
-export default function Main({searchValue}:{searchValue:any}) {
-    const [category, setCategory] = useState([]);
-    const [price, setPrice] = useState();
+export type Category = {
+  category: string;
+};
+
+export default function Main({searchValue}:{searchValue:string}) {
+    const [category, setCategory] = useState<Category[]>([]);
+    const [price, setPrice] = useState<number>(0);
     console.log(price, category);
     return (
         <>

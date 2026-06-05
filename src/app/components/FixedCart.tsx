@@ -2,12 +2,14 @@ import Link from "next/link";
 import { useAppSelector } from "../lib/hooks";
 import { productsTypes } from "./ProductList";
 import { CircleCheck } from 'lucide-react';
+import Image from "next/image";
 
 export default function FixedCart() {
 
-    const item: productsTypes[] = useAppSelector(state => state.cart.items)
+    const item: productsTypes[] = useAppSelector(state => state.cart.items);
+    console.log();
 
-    let subTotal = item.reduce((total, n) => { return total += n.price }, 0)
+    const subTotal = item.reduce((total, n) => { return total += n.price }, 0)
 
 
 
@@ -26,9 +28,10 @@ export default function FixedCart() {
                 <div className="fixed bottom-0 left-0 right-0 w-full p-3 z-100 bg-white border-t border-gray-200 rounded-t-2xl">
                     <div className="flex gap-5 p-2 md:px-8 lg:px-16 2xl:px-20]">
                         <div className="bg-white w-[80%] h-full flex border-r border-gray-400">
-                            <div className="w-[300px] h-[70px]">
-                                <img src={item[item.length - 1]?.image || ''} alt=""
-                                    className="object-contain object-center h-full w-full" />
+                            <div className="w-[300px] h-[70px] relative">
+                                <Image src={item[item.length-1].image || ''} alt=""
+                                    className="object-contain object-center h-full w-full"
+                                    fill />
                             </div>
                             <div>
                                 <div className="flex gap-2 items-center">

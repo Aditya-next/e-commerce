@@ -4,13 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { CartItem, clearCart } from "@/app/lib/feature/cart/cartSlice";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 export default function PlaceOrder() {
   const [paymentType, setPaymentType] = useState("");
   const [orderStuatus, setOrderStatus] = useState(false);
 
   const item: CartItem[] = useAppSelector((state) => state.cart.items);
-  let subTotal = item.reduce((total, n) => {
+  const subTotal = item.reduce((total, n) => {
     return (total += n.price);
   }, 0);
 
@@ -127,11 +128,12 @@ export default function PlaceOrder() {
           </h2>
           <div className="mt-2 flex flex-col items-center content-center">
             <p className="text-center lowercase font-semibold">for shop at</p>
-            <div className="w-[300px] h-auto content-center">
-              <img
+            <div className="w-[300px] h-auto content-center relative">
+              <Image
                 src="/images/logo.png"
                 alt="BrandLogo"
                 className="h-full w-full object-center object-contain"
+                fill
               />
             </div>
             <Link
