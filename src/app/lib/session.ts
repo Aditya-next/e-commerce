@@ -26,9 +26,9 @@ export async function decrypt(session: string | undefined = '') {
     })
     return payload as Session
   } catch (error) {
-    console.log(error);
-    return
-  }
+  console.error('JWT verification failed:', error)
+  return undefined
+}
 }
 
 export async function createSession(userId: number) {
