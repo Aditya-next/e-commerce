@@ -11,7 +11,7 @@ const CartIcon = () => {
 
     return (
         <Link href='/cart'>
-            <div className="rounded-full border p-2 hover:bg-gray-100 relative"><BaggageClaim className="w-5 h-5" />
+            <div className="rounded-full border p-2 hover:bg-gray-100 relative"><BaggageClaim className="lg:h-5 lg:w-5 md:h-4 md:w-4 h-3 w-3" />
                 <div className=" p-2 h-4 w-4 bg-red-500 text-white font-semibold right-0 -top-1 flex items-center justify-center rounded-full absolute text-[8px]"><p>{item.length}</p></div>
             </div>
         </Link>

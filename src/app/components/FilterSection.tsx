@@ -49,11 +49,11 @@ export default function FilterSection({
   }
 
   return (
-    <div className="w-[300px] h-[100vh] border rounded border-gray-200 p-2 sticky top-[80px]">
+    <div className="hidden lg:block col-span-3 col-start-1 h-[100vh] border rounded border-gray-200 p-2 sticky top-[80px]">
       <div className="priceFilter">
         <h2 className="text-[18px] font-semibold">Price Range</h2>
-        <div className="space-y-2">
-          <label htmlFor="priceRange" className="text-sm font-semibold">
+        <div className="space-y-2 flex flex-wrap mt-3 gap-2 items-center">
+          <label htmlFor="priceRange" className="font-semibold">
             Price:
           </label>{" "}
           <input
@@ -62,7 +62,7 @@ export default function FilterSection({
             min={0}
             name="minPrice"
             onChange={(e) => setPriceRange(Number(e.target.value))}
-            className="mixPrice border rounded  px-2"
+            className="mixPrice border rounded  px-2 py-0 h-6  max-w-full"
           />
         </div>
       </div>

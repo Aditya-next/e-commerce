@@ -46,7 +46,6 @@ export default function ProductList({ priceFilter, categoryFilter, searchValue}:
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data);
                 setProducts(data);
                 setFilterData(data);
             }
@@ -77,7 +76,7 @@ useEffect(() => {
   }
 
   // Category Filter
-  if (categoryFilter.length > 0) {
+  if (categoryFilter?.length > 0) {
     const categories = categoryFilter.map((c) => c.category);
 
     data = data.filter((item) =>
@@ -99,10 +98,10 @@ useEffect(() => {
     }
 
     return (
-        <div className="w-full border border-gray-200 rounded p-4">
-            <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-5 justify-stretch">
+        <div className=" lg:col-span-11 lg:col-start-4 col-span-14 col-start-1 border border-gray-200 rounded p-4">
+            <div className=" grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 justify-stretch">
                 {filterData.length > 0 && filterData.map((item, index) => (
-                    <div key={index} className=" grid-cols-[repeat(auto-fit,minmax(300px,1fr))] border relative">
+                    <div key={index} className="border relative">
                         <div className="w-full h-[250px]  bg-gray-200 p-4 relative">
                             <Image
                                 src={item.image || ''}

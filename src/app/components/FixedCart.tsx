@@ -25,7 +25,7 @@ export default function FixedCart() {
     else {
         return (
             <>
-                <div className="fixed bottom-0 left-0 right-0 w-full p-3 z-100 bg-white border-t border-gray-200 rounded-t-2xl">
+                <div className="fixed hidden lg:block bottom-0 left-0 right-0 w-full p-3 z-100 bg-white border-t border-gray-200 rounded-t-2xl">
                     <div className="flex gap-5 p-2 md:px-8 lg:px-16 2xl:px-20]">
                         <div className="bg-white w-[80%] h-full flex border-r border-gray-400">
                             <div className="w-[300px] h-[70px] relative">
