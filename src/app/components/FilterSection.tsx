@@ -77,41 +77,45 @@ export default function FilterSection({
             {" "}
             <input
               type="checkbox"
+              id="men's clothing"
               name="men's clothing"
               value="men's clothing"
               onChange={handleCategory}
             />{" "}
-            <p>{"men's clothing"}</p>
+            <label htmlFor="men's clothing">{"men's clothing"}</label>
           </div>
           <div className="flex gap-1">
             {" "}
             <input
               type="checkbox"
+              id="women's clothing"
               name="women's clothing"
               value="women's clothing"
               onChange={handleCategory}
             />{" "}
-            <p>{"women's clothing"}</p>
+            <label htmlFor="women's clothing">{"women's clothing"}</label>
           </div>
           <div className="flex gap-1">
             {" "}
             <input
               type="checkbox"
+              id="electricals"
               name="electricals"
               value="electricals"
               onChange={handleCategory}
             />{" "}
-            <p>electricals</p>
+            <label htmlFor="electricals">{"electricals"}</label>
           </div>
           <div className="flex gap-1">
             {" "}
             <input
               type="checkbox"
+              id = 'electronics'
               name="electronics"
               value="electronics"
               onChange={handleCategory}
             />{" "}
-            <p>electronics</p>
+             <label htmlFor="electronics">{"electronics"}</label>
           </div>
           <div
             className={`overflow-hidden transition-all duration-300 ease-in-out
@@ -121,21 +125,23 @@ export default function FilterSection({
             <div className="flex gap-1">
               <input
                 type="checkbox"
+                id="jewelery"
                 name="jewelery"
                 value="jewelery"
                 onChange={handleCategory}
               />
-              <p>jewelery</p>
+              <label htmlFor="jewelery">{"jewelery"}</label>
             </div>
 
             <div className="flex gap-1">
               <input
                 type="checkbox"
+                id="health"
                 name="health"
                 value="health"
                 onChange={handleCategory}
               />
-              <p>health</p>
+              <label htmlFor="health">{"health"}</label>
             </div>
           </div>
 
